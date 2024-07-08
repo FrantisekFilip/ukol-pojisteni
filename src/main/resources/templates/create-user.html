@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Nový uživatel</title>
+</head>
+<body>
+<h1>Nový uživatel</h1>
+<form action="create-user" method="post">
+    <label>
+        Jméno:
+        <input type="text" id="firstName" name="firstName" value="" th:field="${userDTO.firstName}">
+    </label><br/>
+
+    <label>
+        Příjmení:
+        <input type="text" id="lastName" name="lastName" value="" th:field="${userDTO.lastName}"/>
+    </label><br/>
+
+    <input type="submit" value="Submit"/> <input type="reset" value="Reset"/>
+</form>
+
+</body>
+</html>
