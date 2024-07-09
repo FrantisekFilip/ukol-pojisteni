@@ -5,6 +5,8 @@ public class UserDTO {
 
     private String lastName;
 
+    private AddressDTO addressDTO;
+
     public String getFirstName() {
         return firstName;
     }
@@ -19,5 +21,13 @@ public class UserDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public AddressDTO getAddressDTO() {
+        return addressDTO;
+    }
+
+    public void setAddressDTO(AddressDTO addressDTO) {
+        this.addressDTO = addressDTO;
     }
 }
