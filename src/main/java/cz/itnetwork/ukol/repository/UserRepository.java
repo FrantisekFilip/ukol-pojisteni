@@ -27,14 +27,14 @@ public class UserRepository {
 
     public Long save(User user) {
 
-
-        String sql = "INSERT INTO users (first_name, last_name) VALUES (?, ?)";
+        String sql = "INSERT INTO users (first_name, last_name, address_id) VALUES (?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcTemplate.update((Connection con) -> {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getFirstName());
             ps.setString(2, user.getLastName());
+            ps.setLong(3, user.getAddress_id());
             return ps;
         }, keyHolder);
 

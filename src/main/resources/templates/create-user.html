@@ -22,6 +22,16 @@
         <input type="text" id="street" name="street" value="" th:field="${userDTO.addressDTO.street}"/>
     </label><br/>
 
+    <label>
+        Město:
+        <input type="text" id="city" name="city" value="" th:field="${userDTO.addressDTO.city}"/>
+    </label><br/>
+
+    <label>
+        PSČ:
+        <input type="text" id="postcode" name="postcode" value="" th:field="${userDTO.addressDTO.postcode}"/>
+    </label><br/>
+
     <input type="submit" value="Submit"/> <input type="reset" value="Reset"/>
 </form>
 

@@ -1,5 +1,6 @@
 package cz.itnetwork.ukol.service;
 
+import cz.itnetwork.ukol.entity.Address;
 import cz.itnetwork.ukol.entity.User;
 import cz.itnetwork.ukol.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    AddressService addressService;
+
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -22,6 +26,10 @@ public class UserService {
     }
 
     public User getNewUser(User user) {
-        return getUserById(userRepository.save(user));
+        Address address = addressService.getNewAddress(user.getAddress());
+        user.setAddress_id(address.getId());
+        User user1 = getUserById(userRepository.save(user));
+        user1.setAddress(address);
+        return user1;
     }
 }

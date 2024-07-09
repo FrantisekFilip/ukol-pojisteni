@@ -4,6 +4,8 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
+    private Address address;
+    private Long address_id;
 
     // Gettery a settery
     public Long getId() {
@@ -28,5 +30,21 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Long getAddress_id() {
+        return address_id;
+    }
+
+    public void setAddress_id(Long address_id) {
+        this.address_id = address_id;
     }
 }

@@ -1,11 +1,19 @@
-package cz.itnetwork.ukol.dto;
+package cz.itnetwork.ukol.entity;
 
-public class AddressDTO {
+public class Address {
+
+    private Long id;
     private String street;
-
     private String city;
-
     private String postcode;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getStreet() {
         return street;
