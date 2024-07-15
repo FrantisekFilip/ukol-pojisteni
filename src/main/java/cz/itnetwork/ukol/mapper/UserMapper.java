@@ -17,6 +17,7 @@ public class UserMapper {
         }
 
         UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
         userDTO.setFirstName(user.getFirstName());
         userDTO.setLastName(user.getLastName());
 
@@ -33,6 +34,7 @@ public class UserMapper {
         }
 
         User user = new User();
+        user.setId(user.getId());
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
 

@@ -1,6 +1,8 @@
 package cz.itnetwork.ukol.repository;
 
+import cz.itnetwork.ukol.entity.Address;
 import cz.itnetwork.ukol.entity.User;
+import cz.itnetwork.ukol.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -17,13 +19,28 @@ public class UserRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private AddressService addressService;
+
     public List<User> findAll() {
-        return jdbcTemplate.query("SELECT * FROM users", new UserRowMapper());
+        String sql = "SELECT u.users_id, u.first_name, u.last_name, u.address_id, " +
+                "a.street, a.city, a.postcode " +
+                "FROM users u " +
+                "JOIN addresses a ON u.address_id = a.id";
+        return jdbcTemplate.query(sql, new UserRowMapper());
     }
 
     public User findById(Long id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM users WHERE users_id = ?", new UserRowMapper(), id);
+        String sql = "SELECT u.users_id, u.first_name, u.last_name, u.address_id, " +
+                "a.street, a.city, a.postcode " +
+                "FROM users u " +
+                "JOIN addresses a ON u.address_id = a.id " +
+                "WHERE u.users_id = ?";
+
+        User user = jdbcTemplate.queryForObject(sql, new UserRowMapper(), id);
+        return user;
     }
+
 
     public Long save(User user) {
 
@@ -48,6 +65,15 @@ public class UserRepository {
             user.setId(rs.getLong("users_id"));
             user.setFirstName(rs.getString("first_name"));
             user.setLastName(rs.getString("last_name"));
+            user.setAddress_id(rs.getLong("address_id"));
+
+            Address address = new Address();
+            address.setId(rs.getLong("address_id"));
+            address.setStreet(rs.getString("street"));
+            address.setCity(rs.getString("city"));
+            address.setPostcode(rs.getString("postcode"));
+
+            user.setAddress(address);
             return user;
         }
     }
