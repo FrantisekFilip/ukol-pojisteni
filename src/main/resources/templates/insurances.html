@@ -5,15 +5,12 @@
     <title>Insurances</title>
 </head>
 <body>
-<h1>Uživatelé</h1>
-<div class="list-group" th:each="userDTO : ${userDTOS}">
+<h1>Pojištění</h1>
+<div class="list-group" th:each="insuranceDTO : ${insuranceDTOS}">
     <div class="user-details list-group-item list-group-item-action active">
-        <a  th:href="@{get-user/{id}(id=${userDTO.id})}" class="list-group-item list-group-item-action">
-            <span th:text="${userDTO.firstName}"></span>
-            <span th:text="${userDTO.lastName}"></span>
-            <span th:text="${userDTO.addressDTO.street}"></span>
-            <span th:text="${userDTO.addressDTO.city}"></span>
-            <span th:text="${userDTO.addressDTO.postcode}"></span>
+        <a class="list-group-item list-group-item-action">
+            <span th:text="${insuranceDTO.type}"></span>
+            <span th:text="${insuranceDTO.description}"></span>
         </a>
     </div>
 </div>
