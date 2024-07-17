@@ -37,6 +37,12 @@ public class AddressRepository {
         return keyHolder.getKey().longValue();
     }
 
+    public void updateAddress(Address address) {
+        String sql = "UPDATE addresses SET street = ?, city = ?, postcode = ? WHERE id = ?";
+
+        jdbcTemplate.update(sql, address.getStreet(), address.getCity(), address.getPostcode(), address.getId());
+    }
+
     private static class AddressRowMapper implements RowMapper<Address> {
         @Override
         public Address mapRow(ResultSet rs, int rowNum) throws SQLException {

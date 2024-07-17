@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Insurances</title>
+</head>
+<body>
+<h1>Uživatelé</h1>
+<div class="list-group" th:each="userDTO : ${userDTOS}">
+    <div class="user-details list-group-item list-group-item-action active">
+        <a  th:href="@{get-user/{id}(id=${userDTO.id})}" class="list-group-item list-group-item-action">
+            <span th:text="${userDTO.firstName}"></span>
+            <span th:text="${userDTO.lastName}"></span>
+            <span th:text="${userDTO.addressDTO.street}"></span>
+            <span th:text="${userDTO.addressDTO.city}"></span>
+            <span th:text="${userDTO.addressDTO.postcode}"></span>
+        </a>
+    </div>
+</div>
+</body>
+</html>

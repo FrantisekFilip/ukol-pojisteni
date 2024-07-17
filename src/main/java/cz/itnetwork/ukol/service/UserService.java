@@ -1,7 +1,9 @@
 package cz.itnetwork.ukol.service;
 
+import cz.itnetwork.ukol.dto.UserDTO;
 import cz.itnetwork.ukol.entity.Address;
 import cz.itnetwork.ukol.entity.User;
+import cz.itnetwork.ukol.mapper.UserMapper;
 import cz.itnetwork.ukol.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +19,14 @@ public class UserService {
     @Autowired
     AddressService addressService;
 
+    @Autowired
+    UserMapper userMapper;
+
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     public User getUserById(Long id) {
-
         return userRepository.findById(id);
     }
 
@@ -32,5 +36,10 @@ public class UserService {
         User user1 = getUserById(userRepository.save(user));
         user1.setAddress(address);
         return user1;
+    }
+
+    public void updateUserById(UserDTO userDTO) {
+        addressService.updateAddress(userDTO.getAddressDTO());
+        userRepository.updateUser(userMapper.toEntity(userDTO));
     }
 }

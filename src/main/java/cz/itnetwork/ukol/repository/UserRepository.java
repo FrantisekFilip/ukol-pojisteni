@@ -2,7 +2,6 @@ package cz.itnetwork.ukol.repository;
 
 import cz.itnetwork.ukol.entity.Address;
 import cz.itnetwork.ukol.entity.User;
-import cz.itnetwork.ukol.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -19,8 +18,6 @@ public class UserRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    private AddressService addressService;
 
     public List<User> findAll() {
         String sql = "SELECT u.users_id, u.first_name, u.last_name, u.address_id, " +
@@ -56,6 +53,12 @@ public class UserRepository {
         }, keyHolder);
 
         return keyHolder.getKey().longValue();
+    }
+
+    public void updateUser(User user) {
+        String sql = "UPDATE users SET first_name = ?, last_name = ? WHERE users_id = ?";
+
+        jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getId());
     }
 
     private static class UserRowMapper implements RowMapper<User> {

@@ -64,8 +64,7 @@ public class UserController {
     public String updateUser(
             @ModelAttribute UserDTO userDTO
     ) {
-        User user = userMapper.toEntity(userDTO);
-        userDTO = userMapper.toDto(userService.getNewUser(user));
+        userService.updateUserById(userDTO);
         return "user";
     }
 }
