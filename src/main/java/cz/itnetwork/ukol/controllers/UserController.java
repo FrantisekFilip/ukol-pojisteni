@@ -1,8 +1,10 @@
 package cz.itnetwork.ukol.controllers;
 
+import cz.itnetwork.ukol.dto.InsuranceDTO;
 import cz.itnetwork.ukol.dto.UserDTO;
 import cz.itnetwork.ukol.entity.User;
 import cz.itnetwork.ukol.mapper.UserMapper;
+import cz.itnetwork.ukol.service.InsuranceService;
 import cz.itnetwork.ukol.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,9 @@ public class UserController {
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    InsuranceService insuranceService;
+
     @GetMapping("get-all")
     public String getAllUsers(
             Model model
@@ -39,7 +44,9 @@ public class UserController {
     public String getUserById(@PathVariable("id") Long id, Model model) {
         User user = userService.getUserById(id);
         UserDTO userDTO = userMapper.toDto(user);
+        List<InsuranceDTO> insuranceDTOS = insuranceService.getAllInsurances();
         model.addAttribute("userDTO", userDTO);
+        model.addAttribute("insuranceDTOS", insuranceDTOS);
         return "user";
     }
 
@@ -55,16 +62,17 @@ public class UserController {
     public String createUser(
             @ModelAttribute UserDTO userDTO
     ) {
-        User user = userMapper.toEntity(userDTO);
-        userDTO = userMapper.toDto(userService.getNewUser(user));
-        return "user";
+        userService.createUser(userMapper.toEntity(userDTO));
+        return "redirect:get-all";
     }
 
     @PostMapping("update-user")
     public String updateUser(
-            @ModelAttribute UserDTO userDTO
+            @ModelAttribute UserDTO userDTO,
+            @RequestParam(name = "insurances", required = false) List<Long> insuranceIds
     ) {
+        userDTO.setInsuranceIds(insuranceIds);
         userService.updateUserById(userDTO);
-        return "user";
+        return "redirect:get-all";
     }
 }

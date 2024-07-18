@@ -22,6 +22,11 @@ public class InsuranceRepository {
         return jdbcTemplate.query(sql, new InsuranceRepository.InsuranceRowMapper());
     }
 
+    public void saveNewInsurance(Insurance entity) {
+        String sql = "INSERT INTO insurances (type, description, amount) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, entity.getType(), entity.getDescription(), entity.getAmount());
+    }
+
     private static class InsuranceRowMapper implements RowMapper<Insurance> {
         @Override
         public Insurance mapRow(ResultSet rs, int rowNum) throws SQLException {

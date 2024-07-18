@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Nový uživatel</title>
+</head>
+<body>
+<div class="btn-group" role="group" aria-label="Výběr kandidáta">
+    <a href="/" class="btn btn-secondary">Domů</a>
+    <a href="../users/get-all" class="btn btn-secondary">Uživatelé</a>
+    <a href="../users/create-user" class="btn btn-primary">Nový uživatel</a>
+    <a href="../insurances/get-all" class="btn btn-secondary">Pojištění</a>
+</div>
+<h1>Nové pojištění</h1>
+<form action="create-insurance" method="post">
+    <label>
+        Typ:
+        <input type="text" id="firstName" name="firstName" value="" th:field="${insuranceDTO.type}">
+    </label><br/>
+
+    <label>
+        Popis:
+        <input type="text" id="lastName" name="lastName" value="" th:field="${insuranceDTO.description}"/>
+    </label><br/>
+
+    <label>
+        Suma:
+        <input type="text" id="street" name="street" value="" th:field="${insuranceDTO.amount}"/>
+    </label><br/>
+
+    <input type="submit" value="Submit"/> <input type="reset" value="Reset"/>
+</form>
+
+</body>
+</html>

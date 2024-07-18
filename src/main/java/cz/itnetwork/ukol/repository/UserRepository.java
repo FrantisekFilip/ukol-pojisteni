@@ -2,6 +2,8 @@ package cz.itnetwork.ukol.repository;
 
 import cz.itnetwork.ukol.entity.Address;
 import cz.itnetwork.ukol.entity.User;
+import cz.itnetwork.ukol.mapper.AddressMapper;
+import cz.itnetwork.ukol.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -17,6 +19,12 @@ public class UserRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private AddressService addressService;
+
+    @Autowired
+    private AddressMapper addressMapper;
 
 
     public List<User> findAll() {
@@ -39,20 +47,13 @@ public class UserRepository {
     }
 
 
-    public Long save(User user) {
-
+    public void save(User user) {
         String sql = "INSERT INTO users (first_name, last_name, address_id) VALUES (?, ?, ?)";
-        KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        jdbcTemplate.update((Connection con) -> {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, user.getFirstName());
-            ps.setString(2, user.getLastName());
-            ps.setLong(3, user.getAddress_id());
-            return ps;
-        }, keyHolder);
+        Long addressId = addressService.getNewAddress(user.getAddress()).getId();
+        user.setAddress_id(addressId);
+        jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getAddress_id());
 
-        return keyHolder.getKey().longValue();
     }
 
     public void updateUser(User user) {

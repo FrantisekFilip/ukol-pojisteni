@@ -2,7 +2,6 @@ package cz.itnetwork.ukol.service;
 
 import cz.itnetwork.ukol.dto.InsuranceDTO;
 import cz.itnetwork.ukol.entity.Insurance;
-import cz.itnetwork.ukol.entity.User;
 import cz.itnetwork.ukol.mapper.InsuranceMapper;
 import cz.itnetwork.ukol.repository.InsuranceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +19,16 @@ public class InsuranceService {
     @Autowired
     InsuranceMapper insuranceMapper;
 
-    public List<InsuranceDTO> getAllUsers() {
+    public List<InsuranceDTO> getAllInsurances() {
         List<Insurance> insurances = insuranceRepository.findAll();
         List<InsuranceDTO> insuranceDTOS = new LinkedList<>();
         for (Insurance insurance : insurances){
             insuranceDTOS.add(insuranceMapper.toDto(insurance));
         }
         return insuranceDTOS;
+    }
+
+    public void saveNewInsurance(InsuranceDTO insuranceDTO){
+        insuranceRepository.saveNewInsurance(insuranceMapper.toEntity(insuranceDTO));
     }
 }

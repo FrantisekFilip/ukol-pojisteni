@@ -1,5 +1,7 @@
 package cz.itnetwork.ukol.dto;
 
+import java.util.List;
+
 public class UserDTO {
     private Long id;
     private String firstName;
@@ -7,6 +9,10 @@ public class UserDTO {
     private String lastName;
 
     private AddressDTO addressDTO;
+
+    private List<Long> insuranceIds;
+
+    private List<InsuranceDTO> insuranceDTOS;
 
     public Long getId() {
         return id;
@@ -37,5 +43,21 @@ public class UserDTO {
 
     public void setAddressDTO(AddressDTO addressDTO) {
         this.addressDTO = addressDTO;
+    }
+
+    public List<Long> getInsuranceIds() {
+        return insuranceIds;
+    }
+
+    public void setInsuranceIds(List<Long> insuranceIds) {
+        this.insuranceIds = insuranceIds;
+    }
+
+    public List<InsuranceDTO> getInsuranceDTOS() {
+        return insuranceDTOS;
+    }
+
+    public void setInsuranceDTOS(List<InsuranceDTO> insuranceDTOS) {
+        this.insuranceDTOS = insuranceDTOS;
     }
 }

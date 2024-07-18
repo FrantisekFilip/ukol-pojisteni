@@ -30,16 +30,16 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public User getNewUser(User user) {
-        Address address = addressService.getNewAddress(user.getAddress());
-        user.setAddress_id(address.getId());
-        User user1 = getUserById(userRepository.save(user));
-        user1.setAddress(address);
-        return user1;
+    public void createUser(User user) {
+        userRepository.save(user);
     }
 
     public void updateUserById(UserDTO userDTO) {
         addressService.updateAddress(userDTO.getAddressDTO());
         userRepository.updateUser(userMapper.toEntity(userDTO));
+
+        if (userDTO.getInsuranceIds() != null) {
+            userInsuranceRepository.updateUserInsurances(userDTO.getId(), userDTO.getInsuranceIds());
+        }
     }
 }
