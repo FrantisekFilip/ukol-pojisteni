@@ -2,6 +2,7 @@ package cz.itnetwork.ukol.mapper;
 
 import cz.itnetwork.ukol.dto.UserDTO;
 import cz.itnetwork.ukol.entity.User;
+import cz.itnetwork.ukol.service.InsuranceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,9 @@ public class UserMapper {
 
     @Autowired
     AddressMapper addressMapper;
+
+    @Autowired
+    InsuranceService insuranceService;
 
     public UserDTO toDto(User user) {
         if (user == null) {
@@ -24,6 +28,17 @@ public class UserMapper {
         if (user.getAddress() != null) {
             userDTO.setAddressDTO(addressMapper.toDto(user.getAddress()));
         }
+
+        return userDTO;
+    }
+
+    public UserDTO toDtoWithInsurances(User user) {
+        if (user == null) {
+            return null;
+        }
+
+        UserDTO userDTO = this.toDto(user);
+        userDTO.setInsuranceDTOS(insuranceService.getInsurancesByUserId(user.getId()));
 
         return userDTO;
     }

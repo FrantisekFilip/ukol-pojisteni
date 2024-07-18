@@ -43,7 +43,7 @@ public class UserController {
     @GetMapping("get-user/{id}")
     public String getUserById(@PathVariable("id") Long id, Model model) {
         User user = userService.getUserById(id);
-        UserDTO userDTO = userMapper.toDto(user);
+        UserDTO userDTO = userMapper.toDtoWithInsurances(user);
         List<InsuranceDTO> insuranceDTOS = insuranceService.getAllInsurances();
         model.addAttribute("userDTO", userDTO);
         model.addAttribute("insuranceDTOS", insuranceDTOS);

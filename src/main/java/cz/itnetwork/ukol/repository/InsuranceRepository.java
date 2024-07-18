@@ -27,6 +27,14 @@ public class InsuranceRepository {
         jdbcTemplate.update(sql, entity.getType(), entity.getDescription(), entity.getAmount());
     }
 
+    public List<Insurance> findInsurancesByUserId(Long userId) {
+        String sql = "SELECT i.id, i.type, i.description, i.amount " +
+                "FROM insurances i " +
+                "JOIN users_insurances ui ON i.id = ui.insurance_id " +
+                "WHERE ui.user_id = ?";
+        return jdbcTemplate.query(sql, new InsuranceRowMapper(), userId);
+    }
+
     private static class InsuranceRowMapper implements RowMapper<Insurance> {
         @Override
         public Insurance mapRow(ResultSet rs, int rowNum) throws SQLException {

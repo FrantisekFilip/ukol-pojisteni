@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class InsuranceService {
@@ -26,6 +27,13 @@ public class InsuranceService {
             insuranceDTOS.add(insuranceMapper.toDto(insurance));
         }
         return insuranceDTOS;
+    }
+
+    public List<InsuranceDTO> getInsurancesByUserId(Long userId) {
+        List<Insurance> insurances = insuranceRepository.findInsurancesByUserId(userId);
+        return insurances.stream()
+                .map(insuranceMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     public void saveNewInsurance(InsuranceDTO insuranceDTO){

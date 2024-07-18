@@ -4,6 +4,7 @@ import cz.itnetwork.ukol.dto.UserDTO;
 import cz.itnetwork.ukol.entity.Address;
 import cz.itnetwork.ukol.entity.User;
 import cz.itnetwork.ukol.mapper.UserMapper;
+import cz.itnetwork.ukol.repository.UserInsuranceRepository;
 import cz.itnetwork.ukol.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,9 @@ public class UserService {
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    UserInsuranceRepository userInsuranceRepository;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
