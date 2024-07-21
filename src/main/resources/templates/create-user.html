@@ -14,34 +14,80 @@
         <a href="../insurances/get-all" class="btn btn-secondary">Pojištění</a>
         <a href="../insurances/create-insurance" class="btn btn-secondary">Nové pojištění</a>
     </div>
+<!--    <h1>Nový uživatel</h1>-->
+<!--    <form action="create-user" method="post">-->
+<!--        <label>-->
+<!--            Jméno:-->
+<!--            <input type="text" id="firstName" name="firstName" value="" th:field="${userDTO.firstName}">-->
+<!--        </label><br/>-->
+
+<!--        <label>-->
+<!--            Příjmení:-->
+<!--            <input type="text" id="lastName" name="lastName" value="" th:field="${userDTO.lastName}"/>-->
+<!--        </label><br/>-->
+
+<!--        <label>-->
+<!--            Ulice:-->
+<!--            <input type="text" id="street" name="street" value="" th:field="${userDTO.addressDTO.street}"/>-->
+<!--        </label><br/>-->
+
+<!--        <label>-->
+<!--            Město:-->
+<!--            <input type="text" id="city" name="city" value="" th:field="${userDTO.addressDTO.city}"/>-->
+<!--        </label><br/>-->
+
+<!--        <label>-->
+<!--            PSČ:-->
+<!--            <input type="text" id="postcode" name="postcode" value="" th:field="${userDTO.addressDTO.postcode}"/>-->
+<!--        </label><br/>-->
+
+<!--        <input type="submit" value="Submit"/> <input type="reset" value="Reset"/>-->
+<!--    </form>-->
     <h1>Nový uživatel</h1>
     <form action="create-user" method="post">
-        <label>
-            Jméno:
-            <input type="text" id="firstName" name="firstName" value="" th:field="${userDTO.firstName}">
-        </label><br/>
+        <div class="container mt-4">
+            <div class="row mb-3">
+                <label for="firstName" class="col-sm-2 col-form-label">Jméno:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="firstName" name="firstName" class="form-control" th:field="${userDTO.firstName}">
+                </div>
+            </div>
 
-        <label>
-            Příjmení:
-            <input type="text" id="lastName" name="lastName" value="" th:field="${userDTO.lastName}"/>
-        </label><br/>
+            <div class="row mb-3">
+                <label for="lastName" class="col-sm-2 col-form-label">Příjmení:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="lastName" name="lastName" class="form-control" th:field="${userDTO.lastName}">
+                </div>
+            </div>
 
-        <label>
-            Ulice:
-            <input type="text" id="street" name="street" value="" th:field="${userDTO.addressDTO.street}"/>
-        </label><br/>
+            <div class="row mb-3">
+                <label for="street" class="col-sm-2 col-form-label">Ulice:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="street" name="street" class="form-control" th:field="${userDTO.addressDTO.street}">
+                </div>
+            </div>
 
-        <label>
-            Město:
-            <input type="text" id="city" name="city" value="" th:field="${userDTO.addressDTO.city}"/>
-        </label><br/>
+            <div class="row mb-3">
+                <label for="city" class="col-sm-2 col-form-label">Město:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="city" name="city" class="form-control" th:field="${userDTO.addressDTO.city}">
+                </div>
+            </div>
 
-        <label>
-            PSČ:
-            <input type="text" id="postcode" name="postcode" value="" th:field="${userDTO.addressDTO.postcode}"/>
-        </label><br/>
+            <div class="row mb-3">
+                <label for="postcode" class="col-sm-2 col-form-label">PSČ:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="postcode" name="postcode" class="form-control" th:field="${userDTO.addressDTO.postcode}">
+                </div>
+            </div>
 
-        <input type="submit" value="Submit"/> <input type="reset" value="Reset"/>
+            <div class="row mb-3">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Odeslat</button>
+                    <button type="reset" class="btn btn-secondary">Obnovit</button>
+                </div>
+            </div>
+        </div>
     </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
