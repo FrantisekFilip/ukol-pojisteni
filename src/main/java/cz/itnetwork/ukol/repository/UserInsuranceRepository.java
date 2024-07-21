@@ -25,4 +25,14 @@ public class UserInsuranceRepository {
             }
         }
     }
+
+    public void deleteUserInsurance(Long userId, Long insuranceId) {
+        String deleteSql = "DELETE FROM users_insurances WHERE user_id = ? AND insurance_id = ?";
+        try {
+            jdbcTemplate.update(deleteSql, userId, insuranceId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -4,6 +4,7 @@ import cz.itnetwork.ukol.dto.InsuranceDTO;
 import cz.itnetwork.ukol.entity.Insurance;
 import cz.itnetwork.ukol.mapper.InsuranceMapper;
 import cz.itnetwork.ukol.repository.InsuranceRepository;
+import cz.itnetwork.ukol.repository.UserInsuranceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,9 @@ public class InsuranceService {
 
     @Autowired
     InsuranceMapper insuranceMapper;
+
+    @Autowired
+    UserInsuranceRepository userInsuranceRepository;
 
     public List<InsuranceDTO> getAllInsurances() {
         List<Insurance> insurances = insuranceRepository.findAll();
@@ -38,5 +42,9 @@ public class InsuranceService {
 
     public void saveNewInsurance(InsuranceDTO insuranceDTO){
         insuranceRepository.saveNewInsurance(insuranceMapper.toEntity(insuranceDTO));
+    }
+
+    public void deleteUserInsurance(Long userId, Long insuranceId){
+        userInsuranceRepository.deleteUserInsurance(userId, insuranceId);
     }
 }

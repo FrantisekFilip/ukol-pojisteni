@@ -42,7 +42,7 @@ public class InsuranceController {
 
     @PostMapping("/delete-insurance")
     public String deleteInsurance(@RequestParam Long insuranceId, @RequestParam Long userId) {
-        //userService.removeInsuranceFromUser(userId, insuranceId);
-        return "redirect:/get-all";
+        insuranceService.deleteUserInsurance(userId,insuranceId);
+        return "redirect:/users/get-user/" + userId;
     }
 }
