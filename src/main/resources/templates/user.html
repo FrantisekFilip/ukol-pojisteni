@@ -38,7 +38,10 @@
             <label for="postcode">PSČ</label>
             <input  type="text" class="form-control" id="postcode" th:field="${userDTO.addressDTO.postcode}">
         </div>
-        <div>
+        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#seznam-pojisteni" aria-expanded="false" aria-controls="ukazka-collapse">
+            Seznam pojištění
+        </button>
+        <div class="collapse" id="seznam-pojisteni">
             <label>Pojištění</label>
             <ul>
                 <li th:each="insuranceDTO : ${userDTO.insuranceDTOS}">
