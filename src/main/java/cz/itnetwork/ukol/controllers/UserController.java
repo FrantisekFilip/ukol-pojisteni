@@ -73,7 +73,6 @@ public class UserController {
     ) {
         userDTO.setInsuranceIds(insuranceIds);
         userService.updateUserById(userDTO);
-        //return "redirect:get-all";
         return "redirect:get-user/" + userDTO.getId();
     }
 }
